@@ -10,7 +10,7 @@
 </ul>
 <p>A biblioteca Infragistics foi considerada, mas não utilizada devido à extrema lentidão na compilação da aplicação em ambiente de desenvolvimento, onde o tempo de compilação foi de 0.1 milissegundos para mais de 7 segundos a cada alteração feita.</p>
 
-<h2>Funcionalidades</h2>
+<h2>Funcionalidades Implementadas</h2>
 
 <h3>Gerenciamento de Baralhos</h3>
 <ul>
