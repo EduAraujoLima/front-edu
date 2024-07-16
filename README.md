@@ -61,7 +61,7 @@
     <pre><code>git clone https://github.com/EduAraujoLima/front-edu</code></pre>
   </li>
   <li>Navegue até o diretório do projeto:
-    <pre><code>cd angular-deck-builder</code></pre>
+    <pre><code>cd front-edu</code></pre>
   </li>
   <li>Instale as dependências:
     <pre><code>npm install</code></pre>
