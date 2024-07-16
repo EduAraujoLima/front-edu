@@ -52,14 +52,14 @@ import { switchMap } from 'rxjs';
               <button
                 (click)="deleteDeck(deck.id)"
                 class="
-                border-4 bg-gradient-to-r from-red-500 to-red-900 border-red-800 text-white p-3"
+                border-4 bg-gradient-to-r from-red-500 to-red-900 border-red-800 text-white px-3"
               >
                 Deletar deck
               </button>
               <button
                 (click)="previewDeck(deck.id)"
                 class="
-                border-4 bg-gradient-to-r from-cyan-500 to-cyan-900 border-cyan-800 text-white p-3"
+                border-4 bg-gradient-to-r from-cyan-500 to-cyan-900 border-cyan-800 text-white px-3"
               >
                 Visualizar deck
               </button>
@@ -74,6 +74,7 @@ import { switchMap } from 'rxjs';
          text-white py-4 uppercase font-bold
          hover:from-cyan-600 hover:to-blue-600 px-4"
         routerLink="/deck-builder"
+        (click)="resetDeck()"
       >
         Criar novo deck
       </button>
@@ -95,5 +96,9 @@ export class DeckListComponent {
       .dispatch(new SelectDeck(id))
       .pipe(switchMap(() => this.router.navigate(['/deck-builder'])))
       .subscribe();
+  }
+
+  resetDeck() {
+    this.store.dispatch(new SelectDeck(''));
   }
 }

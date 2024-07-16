@@ -19,8 +19,6 @@
     "@angular/platform-browser": "^18.1.0",
     "@angular/platform-browser-dynamic": "^18.1.0",
     "@angular/router": "^18.1.0",
-    "@igniteui/material-icons-extended": "^3.0.0",
-    "@ngneat/query": "^3.0.0",
     "@ngxs/devtools-plugin": "^18.0.0-dev.master-b21bfbd",
     "@ngxs/logger-plugin": "^18.0.0-dev.master-b21bfbd",
     "@ngxs/store": "^18.0.0-dev.master-b21bfbd",

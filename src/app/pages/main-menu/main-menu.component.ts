@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Store } from '@ngxs/store';
 import { IgxButtonModule, IgxCardModule } from 'igniteui-angular';
+import { SelectDeck } from '../../core/actions/deck-actions';
 @Component({
   standalone: true,
   imports: [IgxButtonModule, IgxCardModule, RouterLink],
@@ -16,12 +18,13 @@ import { IgxButtonModule, IgxCardModule } from 'igniteui-angular';
            text-white py-4 uppercase font-bold
            hover:from-cyan-600 hover:to-blue-600"
             routerLink="/deck-builder"
+            (click)="resetDeck()"
           >
             Criar novo deck
           </button>
           <button
             class="border-4 bg-gradient-to-r from-cyan-500 to-blue-500 border-cyan-800
-           text-white py-4 uppercase font-bold 
+           text-white py-4 uppercase font-bold
            hover:from-cyan-600 hover:to-blue-600"
            routerLink="/deck-list"
           >
@@ -33,4 +36,10 @@ import { IgxButtonModule, IgxCardModule } from 'igniteui-angular';
   `,
   styleUrl: './main-menu.component.scss',
 })
-export class MainMenuComponent {}
+export class MainMenuComponent {
+  store = inject(Store);
+
+  resetDeck() {
+    this.store.dispatch(new SelectDeck(''));
+  }
+}

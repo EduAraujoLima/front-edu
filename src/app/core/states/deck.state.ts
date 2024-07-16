@@ -8,9 +8,10 @@ import {
   DeleteDeck,
   RemoveCardFromDeck,
   SelectDeck,
+  UpdateDeck,
 } from '../actions/deck-actions';
-import { of, throwError } from 'rxjs';
-import { checkIfCardHasMaxQuantity } from '../../utils/deck.utils';
+import { of, tap, throwError } from 'rxjs';
+import { checkIfCardHasMaxQuantity, getDeck } from '../../utils/deck.utils';
 
 export type DeckStateModel = {
   decks: Deck[];
@@ -138,50 +139,39 @@ export class DeckState {
   createDeck(ctx: StateContext<DeckStateModel>, action: CreateDeck) {
     const state = ctx.getState();
 
-    const quantidadeCartas = state.temporaryCards.length;
+    const {temporaryCards} = state;
 
-    if (quantidadeCartas < 24) {
-      return throwError(() => 'O Deck precisa ter no mínimo 24 cartas');
-    }
+    return getDeck(temporaryCards, action.name)
+    .pipe(
+      tap((newDeck) => {
+        ctx.patchState({
+          decks: [...state.decks, newDeck],
+          temporaryCards: [],
+          cardNameQuantity: new Map(),
+        })
+      })
+    )
+  }
 
-    const tiposUnicos = Array.from(
-      new Set(state.temporaryCards.map((card) => card.supertype))
-    );
+  @Action(UpdateDeck)
+  updateDeck(ctx: StateContext<DeckStateModel>, action: UpdateDeck) {
+    const state = ctx.getState();
 
-    const cores: Type[] = state.temporaryCards.reduce((acc, card) => {
-      if (card?.types) {
-        card.types.forEach((type) => {
-          if (!acc.includes(type)) {
-            acc.push(type);
-          }
+    const {temporaryCards} = state;
+
+    return getDeck(temporaryCards, action.name)
+    .pipe(
+      tap((newDeck) => {
+        const newDecks = state.decks.map((deck) =>
+          deck.id === state.selectedDeck?.id ? newDeck : deck
+        );
+
+        ctx.patchState({
+          decks: newDecks,
+          selectedDeck: newDeck,
+          temporaryCards: [],
+          cardNameQuantity: new Map(),
         });
-      }
-      return acc;
-    }, [] as Type[]);
-
-    const pokemons = state.temporaryCards.filter(
-      (card) => card.supertype === 'Pokémon'
-    ).length;
-    const cartasTreinador = state.temporaryCards.filter(
-      (card) => card.supertype === 'Trainer'
-    ).length;
-
-    const newDeck: Deck = {
-      id: crypto.randomUUID(),
-      name: action.name,
-      cartas: state.temporaryCards,
-      quantidadeCartas,
-      tiposUnicos,
-      cores,
-      pokemons,
-      cartasTreinador,
-    };
-
-    return of(
-      ctx.patchState({
-        decks: [...state.decks, newDeck],
-        temporaryCards: [],
-        cardNameQuantity: new Map(),
       })
     );
   }
