@@ -1,68 +1,75 @@
-# PokeTcg
+<h1>Angular Deck Builder</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.0.
+<h2>Descrição</h2>
+<p>Este é um projeto desenvolvido utilizando Angular 18 com suporte das seguintes bibliotecas e ferramentas:</p>
+<ul>
+  <li><strong>NGXS</strong> para gerenciamento de estados</li>
+  <li><strong>Tailwind CSS</strong> para estilização</li>
+  <li><strong>pokemon-tcg-sdk-typescript</strong> para tipagens</li>
+  <li><strong>@angular/cdk</strong> para implementação do virtual scroll na tela de montagem do deck</li>
+</ul>
+<p>A biblioteca Infragistics foi considerada, mas não utilizada devido à extrema lentidão na compilação da aplicação em ambiente de desenvolvimento, onde o tempo de compilação foi de 0.1 milissegundos para mais de 7 segundos a cada alteração feita.</p>
 
-## Development server
+<h2>Funcionalidades</h2>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-Tecnologias Utilizadas
-Angular 18: O framework base para a construção da aplicação.
-NGXS: Biblioteca de gerenciamento de estado para manter os dados do aplicativo consistentes.
-Tailwind CSS: Biblioteca de CSS para estilização rápida e responsiva.
-pokemon-tcg-sdk-typescript: Biblioteca TypeScript para tipagem precisa de cartas Pokémon.
-@angular/cdk: Biblioteca Angular para implementar rolagem virtual na tela de montagem do deck.
-Recursos
-Visualização de decks:
-O usuário pode ver uma lista de seus decks salvos.
-Criação de decks:
-O usuário pode criar novos decks com nome personalizado e adicionar cartas.
-Edição de decks:
-O usuário pode editar decks existentes, alterando o nome, adicionando ou removendo cartas.
-Remoção de decks:
-Decks podem ser removidos permanentemente.
-Detalhes do deck:
-Cada deck mostra informações detalhadas, como número de cartas de Pokémon e treinador, cores e tipos presentes.
-Validação de decks:
-A aplicação garante que os decks sigam as regras do jogo Pokémon TCG, como o número mínimo e máximo de cartas, e a quantidade máxima de cartas com o mesmo nome.
-Navegação suave:
-A navegação entre as telas é fluida e rápida, graças ao lazy loading de componentes.
-Implementações Detalhadas
-Diretivas Angular:
-As novas diretivas @if, @for e @let do Angular 18 foram utilizadas para melhorar a legibilidade e a reutilização do código.
-Signals e Computed Signals:
-Signals para inputs e outputs foram usados para gerenciar o fluxo de dados reativamente. Computed signals foram utilizados para derivar informações a partir de outros dados do aplicativo.
-Componentes Standalone:
-Os componentes da aplicação foram criados como standalone, facilitando o teste e a reutilização.
-Lazy Loading:
-Os componentes são carregados de forma preguiçosa, otimizando o desempenho da aplicação.
-Observações
-Infragistics: A biblioteca Infragistics foi testada, mas devido à lentidão extrema na compilação (de 0.1 ms para mais de 7 segundos por alteração), foi substituída por outras soluções.
-Armazenamento de dados: Os decks são armazenados apenas na memória do navegador. A persistência de dados em um banco de dados pode ser implementada posteriormente.
-Começando
-Para executar a aplicação, siga estas etapas:
+<h3>Gerenciamento de Baralhos</h3>
+<ul>
+  <li>O usuário pode ver seus baralhos</li>
+  <li>O usuário pode criar um novo baralho</li>
+  <li>O usuário pode remover um baralho</li>
+  <li>O usuário pode editar um baralho</li>
+  <li>O usuário pode clicar num baralho para visualizar seus detalhes</li>
+</ul>
 
-Clone o repositório do projeto.
-Instale as dependências com npm install.
-Execute ng serve para iniciar a aplicação em um servidor de desenvolvimento local.
-Acesse a aplicação em http://localhost:4200.
-Contribuições
-Sua contribuição para este projeto é bem-vinda! Se você tiver sugestões de melhorias, correções de bugs ou novas ideias, sinta-se à vontade para abrir um pull request.
-## Code scaffolding
+<h3>Criação de um Baralho</h3>
+<ul>
+  <li>O usuário pode colocar um nome no seu baralho</li>
+  <li>O usuário pode inserir cartas no baralho</li>
+  <li>O baralho deve ter no mínimo 24 cartas e no máximo 60 cartas</li>
+  <li>Só podem ter 4 cartas com o mesmo nome no baralho (nome, não ID)</li>
+  <li>Após salvar o baralho, o usuário é redirecionado para a página de lista de baralhos atualizada</li>
+  <li>O baralho será salvo apenas em memória</li>
+</ul>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<h3>Detalhes do Baralho</h3>
+<ul>
+  <li>O usuário consegue ver quantos pokémons e cartas de treinador existem no baralho (atributo supertype)</li>
+  <li>O usuário consegue ver de quantas cores é o baralho, quantos types únicos existem no baralho</li>
+</ul>
 
-## Build
+<h2>Tecnologias Utilizadas</h2>
+<ul>
+  <li><strong>Angular 18</strong>: Framework principal para o desenvolvimento da aplicação</li>
+  <li><strong>NGXS</strong>: Gerenciamento de estado</li>
+  <li><strong>Tailwind CSS</strong>: Estilização</li>
+  <li><strong>pokemon-tcg-sdk-typescript</strong>: Tipagens para cartas Pokémon</li>
+  <li><strong>@angular/cdk</strong>: Virtual scroll na tela de montagem do deck</li>
+</ul>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+<h2>Detalhes Técnicos</h2>
+<ul>
+  <li>Utilização das novas diretivas <code>@if</code>, <code>@for</code>, <code>@let</code></li>
+  <li>Utilização de signals e computed signals para inputs e outputs</li>
+  <li>Implementação de standalone components</li>
+  <li>Navegação com lazy load dos componentes</li>
+</ul>
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+<h2>Instalação e Execução</h2>
+<p>Para rodar este projeto em sua máquina local, siga os passos abaixo:</p>
+<ol>
+  <li>Clone o repositório:
+    <pre><code>git clone https://github.com/EduAraujoLima/front-edu</code></pre>
+  </li>
+  <li>Navegue até o diretório do projeto:
+    <pre><code>cd angular-deck-builder</code></pre>
+  </li>
+  <li>Instale as dependências:
+    <pre><code>npm install</code></pre>
+  </li>
+  <li>Inicie o servidor de desenvolvimento:
+    <pre><code>ng serve</code></pre>
+  </li>
+  <li>Abra o navegador e acesse:
+    <pre><code>http://localhost:4200</code></pre>
+  </li>
+</ol>
