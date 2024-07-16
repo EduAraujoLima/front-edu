@@ -9,6 +9,7 @@
   <li><strong>@angular/cdk</strong> para implementação do virtual scroll na tela de montagem do deck</li>
 </ul>
 <p>A biblioteca Infragistics foi considerada, mas não utilizada devido à extrema lentidão na compilação da aplicação em ambiente de desenvolvimento, onde o tempo de compilação foi de 0.1 milissegundos para mais de 7 segundos a cada alteração feita.</p>
+<a href="https://codepen.io/trulymittal/pen/LMOJWv"> Link do loader utilizado </a>
 
 <h2>Funcionalidades Implementadas</h2>
 
