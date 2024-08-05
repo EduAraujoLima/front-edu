@@ -1,3 +1,19 @@
+<h2>V2 Update</h1>
+
+<p>Foi adicionado Ionic no projeto, para ter acesso, clone o projeto e mude para a branch <b>ionic-convertion</b></p>
+<p>Rode o projeto com o comando <pre>npm run ionic:serve</pre>,
+  após isso basta acessar o endereço Ip exibido no console pelo navegador de internet no seu computador ou pelo"Nexus Browser" em um smartphone conectado na mesma rede local
+  <a href="https://apps.apple.com/br/app/nexus-browser/id6445866986">Nexus Browser Apple Store</a>
+  <br>
+  <a href="https://play.google.com/store/apps/details?id=com.nexusconcepts.nexus&hl=pt&gl=US&pli=1">Nexus Browser Google Play</a>
+</p>
+
+<h2>Observação</h2>
+<ol>
+  <li>Não foram gerados projetos Android e iOS para o aplicativo para evitar complexidades</p>
+  <li>Para ter acesso ao código do desafio feito completamente em angular antes da conversão basta acessar a branch main</li>
+</li>
+
 <h1>Angular Deck Builder</h1>
 
 <h2>Descrição</h2>
