@@ -1,4 +1,3 @@
-import { getDeck } from './../../utils/deck.utils';
 import { Component, inject, OnInit } from '@angular/core';
 import { select, Store } from '@ngxs/store';
 import { TCGState } from '../../core/states/tcg.state';
@@ -9,8 +8,14 @@ import { LoaderComponent } from '../../components/loader.component';
 import { DeckCardListComponent } from './components/deck-card-list/deck-card-list.component';
 import { CreateDeck, UpdateDeck } from '../../core/actions/deck-actions';
 import { Router, RouterModule } from '@angular/router';
-import { switchMap } from 'rxjs';
 import { DeckState } from '../../core/states/deck.state';
+import {
+  IonContent,
+  IonLabel,
+  IonSegment,
+  IonSegmentButton,
+} from '@ionic/angular/standalone';
+import { switchMap } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -20,23 +25,35 @@ import { DeckState } from '../../core/states/deck.state';
     LoaderComponent,
     DeckCardListComponent,
     RouterModule,
+    IonSegment,
+    IonSegmentButton,
+    IonLabel,
+    IonContent,
   ],
   template: `
-    <div class="wrapper h-screen w-100 p-8 grid grid-cols-10 gap-8">
-      <div
-        class="col-span-7 rounded-md bg-white bg-opacity-75 overflow-y-scroll"
-      >
-        @if(cards().length) {
+    <ion-content [fullscreen]="true">
+      <div class="wrapper h-full max-h-full flex flex-col overflow-hidden">
+        <div class="mx-8 pt-16">
+          <ion-segment value="cardList" slot="fixed" #segment>
+            <ion-segment-button value="cardList">
+              <ion-label>Card List</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="deckDetails">
+              <ion-label>Deck Details</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </div>
+        <div class="grow mt-6 overflow-auto">
+          @switch (segment.value) { @case ('deckDetails') {
+          <app-deck-card-list (onSaveDeck)="handleSaveDeck($event)" />
+          } @default { @defer(when cards().length) {
           <app-card-grid [cards]="cards()" />
-        }
-        <app-loader />
+          } @placeholder {
+          <app-loader />
+          } } }
+        </div>
       </div>
-      <div
-        class="col-span-3 rounded-md bg-white bg-opacity-75 overflow-y-hidden"
-      >
-        <app-deck-card-list (onSaveDeck)="handleSaveDeck($event)" />
-      </div>
-    </div>
+    </ion-content>
   `,
   styleUrl: './deck-builder.component.scss',
 })

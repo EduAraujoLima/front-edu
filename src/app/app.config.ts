@@ -9,6 +9,7 @@ import { withNgxsReduxDevtoolsPlugin } from '@ngxs/devtools-plugin';
 import { TCGState } from './core/states/tcg.state';
 import { loaderInterceptor } from './core/interceptors/loader.interceptor';
 import { DeckState } from './core/states/deck.state';
+import { provideIonicAngular } from '@ionic/angular/standalone';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimations(),
     provideHttpClient(withInterceptors([loaderInterceptor])),
-    provideStore([TCGState, DeckState], withNgxsLoggerPlugin(), withNgxsReduxDevtoolsPlugin())
+    provideStore([TCGState, DeckState], withNgxsReduxDevtoolsPlugin()), provideIonicAngular({})
   ],
 };

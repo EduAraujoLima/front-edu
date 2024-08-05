@@ -1,0 +1,8 @@
+ion-grid {
+  --ion-grid-columns: 2;
+  z-index: 1;
+}
+
+.custom-alert .alert-wrapper {
+  z-index: 99999;
+}

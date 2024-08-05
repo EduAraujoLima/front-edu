@@ -21,6 +21,8 @@ import { LoaderService } from '../services/loader.service';
         height: 100%;
         width: 100%;
         background: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        inset: 0;
       }
       .pokemon {
         inset: 0;

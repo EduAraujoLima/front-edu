@@ -1,0 +1,16 @@
+ion-input.custom {
+    --background: #fff;
+    --placeholder-opacity: 0.8;
+  
+    --padding-bottom: 10px;
+    --padding-end: 10px;
+    --padding-start: 10px;
+
+    border-radius: 10px;
+  }
+
+  .card-list {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    height: 0;
+  }

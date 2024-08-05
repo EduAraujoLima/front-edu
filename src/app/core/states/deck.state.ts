@@ -138,9 +138,9 @@ export class DeckState {
   @Action(CreateDeck)
   createDeck(ctx: StateContext<DeckStateModel>, action: CreateDeck) {
     const state = ctx.getState();
-
     const {temporaryCards} = state;
-
+  
+    
     return getDeck(temporaryCards, action.name)
     .pipe(
       tap((newDeck) => {

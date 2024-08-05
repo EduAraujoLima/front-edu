@@ -3,21 +3,16 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./app.component').then((c) => c.AppComponent),
-    children: [
-      {
-        path: '',
-        redirectTo: 'main-menu',
-        pathMatch: 'full',
-      },
-      {
-        path: 'main-menu',
-        loadComponent: () =>
-          import('./pages/main-menu/main-menu.component').then(
-            (c) => c.MainMenuComponent
-          ),
-      },
-    ],
+    redirectTo: 'main-menu',
+    pathMatch: 'full',
+    
+  },
+  {
+    path: 'main-menu',
+    loadComponent: () =>
+      import('./pages/main-menu/main-menu.component').then(
+        (c) => c.MainMenuComponent
+      ),
   },
   {
     path: 'deck-builder',

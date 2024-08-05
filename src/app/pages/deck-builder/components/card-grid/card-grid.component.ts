@@ -1,44 +1,83 @@
 import { Component, inject, input } from '@angular/core';
-import { ScrollingModule, CdkScrollableModule } from '@angular/cdk/scrolling';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { Card } from 'pokemon-tcg-sdk-typescript/dist/sdk';
 import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
 import { Store } from '@ngxs/store';
 import { AddCardToDeck } from '../../../../core/actions/deck-actions';
 import { LoaderComponent } from '../../../../components/loader.component';
+import {
+  IonAlert,
+  IonCol,
+  IonGrid,
+  IonRow,
+  IonToast,
+} from '@ionic/angular/standalone';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-card-grid',
   standalone: true,
-  imports: [ScrollingModule, PokemonCardComponent, LoaderComponent],
+  imports: [
+    ScrollingModule,
+    PokemonCardComponent,
+    LoaderComponent,
+    IonGrid,
+    IonRow,
+    IonCol,
+    JsonPipe,
+    IonAlert,
+    IonToast,
+  ],
   template: `
-    <cdk-virtual-scroll-viewport itemSize="25" class="viewport">
-      <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:cols-6 gap-8 p-4"
-      >
-        <app-pokemon-card
-          *cdkVirtualFor="let card of cards()"
-          [card]="card"
-          (onCardClick)="addCardToDeck($event)"
-        />
-      </div>
-    </cdk-virtual-scroll-viewport>
-  `,
-  styles: `
-    .viewport {
-      min-height: 100%;
-      width: 100%;
-    }
+    <ion-alert
+      [isOpen]="isMaxQuantityAlertOpen"
+      header="Error"
+      [message]="isMaxQuantityAlertText"
+      [buttons]="isMaxQuantityAlertButtons"
+      (didDismiss)="isMaxQuantityAlertOpen = false"
+    ></ion-alert>
 
+    <ion-toast
+      [isOpen]="isAddCardToDeckToastOpen"
+      [message]="isAddCardToDeckToastText"
+      [duration]="5000"
+      (didDismiss)="isAddCardToDeckToastOpen = false"
+      position="bottom"
+    ></ion-toast>
+    <ion-grid>
+      <ion-row class="ion-align-items-start">
+        @for (card of cards(); track $index) {
+        <ion-col size="1">
+          <app-pokemon-card
+            [card]="card"
+            (onCardClick)="addCardToDeck($event)"
+          />
+        </ion-col>
+        }
+      </ion-row>
+    </ion-grid>
   `,
+  styleUrls: ['./card-grid.component.scss'],
 })
 export class CardGridComponent {
   cards = input.required<Card[]>();
+  isMaxQuantityAlertOpen = false;
+  isMaxQuantityAlertText = '';
+  isMaxQuantityAlertButtons = ['Close'];
+
+  isAddCardToDeckToastOpen = false;
+  isAddCardToDeckToastText = '';
   private store = inject(Store);
 
   addCardToDeck(card: Card) {
     this.store.dispatch(new AddCardToDeck(card)).subscribe({
+      next: () => {
+        this.isAddCardToDeckToastOpen = true;
+        this.isAddCardToDeckToastText = `${card.name} added to deck`;
+      },
       error: (message: string) => {
-        alert(message || 'An error occurred');
+        this.isMaxQuantityAlertOpen = true;
+        this.isMaxQuantityAlertText = message;
       },
     });
   }

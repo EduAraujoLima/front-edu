@@ -1,0 +1,9 @@
+html {
+    --ion-safe-area-left: 25px;
+    --ion-safe-area-right: 25px;
+    --ion-safe-area-top: 25px;
+  }
+  
+  ion-modal {
+    --ion-safe-area-top: 0;
+  }
